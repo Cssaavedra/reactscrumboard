@@ -73,7 +73,7 @@ export function deleteBoard(boardId) {
 
     return dispatch({
       type: types.DELETE_BOARD,
-      // boards,
+       boards,
     });
   };
 }

@@ -135,7 +135,7 @@ class Board extends React.Component {
               contentLabel="Minimal Modal Example"
             >
               <button onClick={this.handleCloseModal}>Close Modal</button>
-              {this.state.users.map(user => <User name={user.google_name} picture={user.picture} />)}
+              {this.state.users.map(user => <User boardId={this.props.match.params.id} id={user.user_id} name={user.google_name} picture={user.picture} />)}
             </Modal>
             <div className="board-forms">
               <form onSubmit={this.handleSubmit}>
