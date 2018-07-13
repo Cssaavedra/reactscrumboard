@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BoardList from './BoardList.jsx';
+//import Invites from './Invites.jsx';
 import * as boardActions from '../actions/boards.js';
 import { connect } from 'react-redux';
 // import Header from './Header.jsx'; 
@@ -9,6 +10,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addBoard: (name, userId) => dispatch(boardActions.addBoard(name, userId)),
     getBoards: userId => dispatch(boardActions.getBoards(userId)),
+    getInvites: userId => dispatch(boardActions.getInvites(userId))
   };
 };
 
@@ -37,6 +39,7 @@ class DashboardPage extends React.Component {
     return (
       <div className="dashboard-page">
         {/* <Header match={this.props.match} history={this.props.history} /> */}
+        {/* <Invites getInvites ={this.props.getInvites} userID={this.props.match.params.id}/> */}
         <BoardList
           userID={this.props.match.params.id}
           history={this.props.history}

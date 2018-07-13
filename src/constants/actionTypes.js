@@ -17,3 +17,5 @@ export const DELETE_BOARD = 'DELETE_BOARD';
 export const GET_USERS = 'GET_USERS';
 export const IS_LOGGED_IN = 'IS_LOGGED_IN';
 export const IS_LOGGED_OUT = 'IS_LOGGED_OUT';
+
+export const GET_INVITES = 'GET_INVITES';

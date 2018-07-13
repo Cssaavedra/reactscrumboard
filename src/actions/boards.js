@@ -61,6 +61,7 @@ export function deleteBoard(boardId) {
   return async function (dispatch, getState) {
     console.log('I am running in deleteBoard action');
     const boards = getState().boards.filter(board => board.board_id !== boardId);
+    
     const response = await fetch('http://localhost:3000/boards', {
       method: 'DELETE',
       headers: {
@@ -72,6 +73,25 @@ export function deleteBoard(boardId) {
 
     return dispatch({
       type: types.DELETE_BOARD,
+      // boards,
+    });
+  };
+}
+
+export function getInvites(userId) {
+  return async function (dispatch, getState) {
+    console.log('I am running in getInvites action');
+    const response = await fetch('http://localhost:3000/getInvites', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_id: userId }),
+    });
+
+    return dispatch({
+      type: types.GET_INVITES,
       boards,
     });
   };

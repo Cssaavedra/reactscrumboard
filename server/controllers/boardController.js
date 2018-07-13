@@ -52,6 +52,14 @@ const boardController = {
     });
 
   },
+  checkInvites: (req,res) =>{
+    const query = 'SELECT * FROM invites WHERE user_id =$1';
+    const values = [`${req.body.userId}`];
+    db.query(query, values, (err, results) =>{
+      if (err) return err;
+      if (results.rows) res.json(results.rows);
+    })
+  },
 
   sendInvite:  (req, res) => {
     const query = `INSERT INTO invites (board_id, user_id) VALUES ($1, $2) RETURNING *`;
