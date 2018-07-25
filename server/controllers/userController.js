@@ -41,7 +41,7 @@ const userController = {
    },
 
    getUsers: (req, res) => {
-      //console.log('inside get users');
+      console.log('inside get users');
       const query = 'SELECT * FROM users';
       db.query(query, (err, results) => {
          if (err) res.json(err);

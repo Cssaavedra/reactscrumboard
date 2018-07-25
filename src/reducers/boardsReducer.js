@@ -16,8 +16,6 @@ export default (state = [], action) => {
     case types.DELETE_BOARD:
       boards = action.boards;
       return boards;
-    case types.GET_INVITES: 
-      return boards;
     default:
       return state;
   }

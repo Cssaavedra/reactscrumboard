@@ -1,4 +1,3 @@
- 
 const db = require('../db/index.js');
 
 const boardController = {
@@ -19,7 +18,7 @@ const boardController = {
   deleteBoard: (req, res) => {
     console.log('inside of deleteBoard ', req.body);
     const query = `BEGIN;
-    DELETE FROM story WHERE board_id = ${req.body.board_id};
+    DELETE FROM story WHERE board_id = ${req.body.board_id}; 
     DELETE FROM task WHERE board_id = ${req.body.board_id};
     DELETE FROM permissions WHERE board_id= ${req.body.board_id};
     DELETE FROM invites WHERE board_id= ${req.body.board_id};
@@ -28,8 +27,8 @@ const boardController = {
     //const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
-      console.log(results.rows);
-      //res.json(results.rows);
+      console.log(results);
+      res.json(results.rows);
     })
   },
 
@@ -40,6 +39,7 @@ const boardController = {
     db.query(query, values, (err, results) => {
       if (err) console.log('THIS IS ERROR ', err);
       else {
+        console.log('I am in addboard', results.rows[0]);
         const innerQuery = 'INSERT INTO permissions (board_id, user_id) VALUES ($1, $2) RETURNING *';
         const innerVals = [`${results.rows[0].board_id}`, `${req.body.userId}`];
         db.query(innerQuery, innerVals, (err, innerResults) => {
@@ -52,16 +52,9 @@ const boardController = {
     });
 
   },
-  checkInvites: (req,res) =>{
-    const query = 'SELECT * FROM invites WHERE user_id =$1';
-    const values = [`${req.body.userId}`];
-    db.query(query, values, (err, results) =>{
-      if (err) return err;
-      if (results.rows) res.json(results.rows);
-    })
-  },
 
   sendInvite: (req, res) => {
+    console.log(req.body);
     const query = `INSERT INTO invites (board_id, user_id) VALUES ($1, $2) RETURNING *`;
     const values = [`${parseInt(req.body.board_id)}`, `${req.body.user_id}`];
     db.query(query, values, (err, results) => {
